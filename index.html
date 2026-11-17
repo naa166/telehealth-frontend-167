@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catatan Keluhan · Self-Assessment Telehealth</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f1fa;--ink:#1c1b3a;--mut:#63627f;--acc:#4b3fe0;--soft:#e8e6ff;--line:#dcdaf0;--ok:#157a54;--warn:#a15c00;--err:#c0302b;font-family:Figtree,system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.55}
+header{background:var(--ink);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:.8rem 1.2rem;flex-wrap:wrap;gap:.5rem}
+header b{font-size:1.15rem;font-weight:800;letter-spacing:-.01em}
+nav a{color:#c9c6f5;text-decoration:none;margin-left:1rem;padding:.2rem 0;border-bottom:2px solid transparent}
+nav a.on{color:#fff;border-color:#fff}
+main{max-width:720px;margin:0 auto;padding:1.2rem}
+h1{font-size:1.7rem;letter-spacing:-.02em;margin:.2rem 0 .6rem}h2{font-size:1.2rem;margin:.2rem 0 .5rem}
+.mut{color:var(--mut);font-size:.92rem}.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1.1rem;margin:0 0 1rem}
+.btn{display:inline-block;background:var(--acc);color:#fff;border:2px solid var(--acc);border-radius:8px;padding:.6rem 1.1rem;font:600 1rem inherit;font-family:inherit;cursor:pointer;text-decoration:none}
+.btn.ghost{background:#fff;color:var(--acc)}.btn.red{background:#fff;color:var(--err);border-color:var(--err)}.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.sm{padding:.3rem .7rem;font-size:.9rem}
+.row{display:flex;gap:.6rem;flex-wrap:wrap;margin:.8rem 0}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #f0a500;outline-offset:2px}
+label.f{display:block;font-weight:600;margin:.9rem 0 .3rem}
+input[type=text],input[type=number],input[type=date],input[type=password],textarea{width:100%;padding:.6rem;border:1.5px solid #b9b7dc;border-radius:8px;font:inherit}
+.ch{display:inline-block;border:1.5px solid #b9b7dc;background:#fff;border-radius:8px;padding:.45rem .8rem;margin:0 .4rem .4rem 0;font:inherit;cursor:pointer;color:var(--ink)}
+.ch.on{background:var(--soft);border-color:var(--acc);font-weight:600}
+.q{margin:1.1rem 0}.q .t{font-weight:600}.req{color:var(--err)}.er{color:var(--err);font-size:.9rem;margin-top:.25rem}.q.bad input,.q.bad textarea{border-color:var(--err)}
+.bar{height:6px;background:var(--line);border-radius:6px;margin:.3rem 0 1rem}.bar i{display:block;height:100%;background:var(--acc);border-radius:6px}
+.bd{display:inline-block;font-size:.8rem;font-weight:600;padding:.1rem .55rem;border-radius:20px;background:#eceaf7;color:var(--mut);margin-right:.3rem}
+.bd.terkirim,.bd.sudah_ditinjau,.bd.klarifikasi_dijawab{background:#d9f3e8;color:var(--ok)}
+.bd.perlu_klarifikasi,.bd.draft,.bd.menunggu_peninjauan{background:#fff0d1;color:var(--warn)}
+.bd.sedang_ditinjau{background:var(--soft);color:var(--acc)}
+.note{background:#fff0d1;border-left:4px solid #f0a500;padding:.7rem .9rem;border-radius:6px;margin:0 0 1rem}
+.info{background:var(--soft);border-left:4px solid var(--acc);padding:.7rem .9rem;border-radius:6px;margin:0 0 1rem}
+table{width:100%;border-collapse:collapse}td{padding:.45rem .3rem;border-bottom:1px solid var(--line);vertical-align:top;font-size:.95rem}td:first-child{color:var(--mut);width:42%}
+.stats{display:flex;gap:1.4rem;flex-wrap:wrap}.stats div b{display:block;font-size:1.7rem;line-height:1.1}
+.tl{border-left:2px solid var(--line);margin-left:.4rem;padding-left:1rem}.tl p{margin:0 0 .7rem}
+.big{font-size:3rem;font-weight:800;line-height:1}
+#toast{position:fixed;left:50%;bottom:1.2rem;transform:translateX(-50%);background:var(--ink);color:#fff;padding:.7rem 1.1rem;border-radius:8px;max-width:90%;display:none;z-index:9}
+#toast.err{background:var(--err)}
+footer{max-width:720px;margin:0 auto;padding:0 1.2rem 2rem;color:var(--mut);font-size:.85rem}
+
+:root{--bg:#fbf4f8;--ink:#2b1330;--mut:#6f5a73;--acc:#c2185b;--soft:#fde1ee;--line:#ecd3e0}
+h1,h2,.big,header b{font-family:Fraunces,Georgia,serif;font-weight:800}
+header{background:var(--ink)}
+.card{border-left:5px solid var(--acc);border-radius:4px 14px 14px 4px}
+.btn{border-radius:999px}.ch{border-radius:999px}
+.bar i{background:linear-gradient(90deg,#c2185b,#5b1e4d)}
+.info{background:var(--soft);border-color:var(--acc)}
+@media(min-width:900px){
+ header{position:fixed;left:0;top:0;bottom:0;width:230px;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:2rem;padding:1.6rem 1.3rem}
+ header b{font-size:1.5rem;line-height:1.1}
+ nav{display:flex;flex-direction:column;gap:.6rem}nav a{margin:0;font-size:1.05rem}
+ main,footer{margin-left:calc(230px + (100% - 230px - 720px)/2);margin-right:auto}
+ main{max-width:720px}footer{max-width:720px}
+}
+
+body{background:#fbf4f8;position:relative;min-height:100vh}
+body::before{content:"";position:fixed;inset:-10%;z-index:-1;pointer-events:none;
+ background:radial-gradient(circle at 15% 20%,#ff8fc0 0,transparent 38%),radial-gradient(circle at 85% 15%,#ffc46b 0,transparent 36%),radial-gradient(circle at 70% 85%,#b79cff 0,transparent 40%),radial-gradient(circle at 20% 90%,#7fd8e6 0,transparent 35%);
+ filter:blur(70px);opacity:.75}
+.card,.note,.info{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);border-top:1px solid rgba(255,255,255,.8);border-right:1px solid rgba(255,255,255,.8);border-bottom:1px solid rgba(255,255,255,.8)}
+.note{background:rgba(255,240,209,.6)}.info{background:rgba(253,225,238,.6)}
+input[type=text],input[type=number],input[type=date],input[type=password],textarea,.ch{background:rgba(255,255,255,.7)}
+.ch.on{background:rgba(253,225,238,.9)}
+#toast{backdrop-filter:blur(8px)}
+@media(prefers-reduced-motion:reduce){body::before{filter:blur(70px)}}
+
+:root{font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+h1,h2,.big,header b{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-weight:800;letter-spacing:-.025em}
+body{background:#f7eef4;min-height:100vh}
+body::before{content:"";position:fixed;inset:-10%;z-index:-1;pointer-events:none;filter:blur(90px);
+ background:radial-gradient(circle at 15% 20%,#c2185b88 0,transparent 38%),radial-gradient(circle at 85% 15%,#5b1e4d66 0,transparent 38%),radial-gradient(circle at 70% 85%,#c2185b55 0,transparent 40%),radial-gradient(circle at 10% 90%,#fde1ee 0,transparent 45%)}
+.card{background:rgba(255,255,255,.55);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);border:1px solid rgba(255,255,255,.75);border-left:5px solid var(--acc);border-radius:18px;box-shadow:0 8px 30px rgba(43,19,48,.08)}
+header{background:rgba(43,19,48,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.ch{background:rgba(255,255,255,.7)}.ch.on{background:var(--soft)}
+input[type=text],input[type=number],input[type=date],input[type=password],textarea{background:rgba(255,255,255,.8);border-radius:12px}
+.note{background:rgba(255,240,209,.8)}.info{background:rgba(253,225,238,.8)}
+.bd{backdrop-filter:blur(6px)}
+
+.bar i{background:var(--acc)}
+body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;width:46vmax;height:46vmax;filter:blur(100px);opacity:.4}
+body::before{inset:auto;left:-12vmax;top:-12vmax;background:#c2185b}
+body::after{right:-14vmax;bottom:-14vmax;background:#5b1e4d}
+
+body{background:#fbf4f8}
+body::before,body::after{opacity:.2;filter:blur(110px)}
+body::after{opacity:.14}
+.card{border-radius:28px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);border-left:5px solid var(--acc);
+ box-shadow:0 22px 40px -14px rgba(194,24,91,.28),0 8px 18px rgba(43,19,48,.10),inset 0 2px 0 rgba(255,255,255,.9)}
+</style>
+</head>
+<body>
+<header><b>Catatan Keluhan</b><nav><a href="#/home" data-p="home">Beranda</a><a href="#/history" data-p="history">Riwayat</a><a href="#/settings" data-p="settings">Pengaturan</a></nav></header>
+<main id="app"></main>
+<footer><b>Hasil self-assessment bukan diagnosis.</b> Laporan Anda akan ditinjau oleh tenaga kesehatan.</footer>
+<div id="toast" role="status"></div>
+<script>
+const $=s=>document.querySelector(s),
+E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),
+g=(o,...k)=>{for(const x of k)if(o&&o[x]!=null)return o[x];return ''},
+L=x=>Array.isArray(x)?x:x?[x]:[],
+F=d=>d?new Date(d).toLocaleString('id-ID',{dateStyle:'medium',timeStyle:'short'}):'',
+empty=v=>v==null||v===''||(Array.isArray(v)&&!v.length);
+let cfg=JSON.parse(localStorage.getItem('cfg')||'{}');
+cfg.api=cfg.api||'https://telehealth.informatikaunimus.site/api';
+const ready=()=>cfg.token&&cfg.nim&&cfg.nama&&cfg.kelas,
+MHS=()=>({nim:cfg.nim,nama:cfg.nama,kelas:cfg.kelas});
+const HINT={401:'Token salah atau belum diisi. Periksa di Pengaturan.',403:'Akun ini tidak berhak membuka halaman tersebut.',404:'Data tidak ditemukan atau bukan milik akun ini.',409:'Aksi ditolak: laporan sudah dikirim dan tidak dapat diubah.',422:'Ada isian yang perlu diperbaiki.'};
+async function api(p,m='GET',b){
+  let r;try{r=await fetch(cfg.api+p,{method:m,headers:{Authorization:'Bearer '+cfg.token,'Content-Type':'application/json'},body:b?JSON.stringify(b):undefined})}
+  catch(x){throw{status:0,message:'Tidak dapat terhubung ke server. Periksa koneksi internet dan alamat API.',errors:{}}}
+  let j={};try{j=await r.json()}catch(x){}
+  if(!j.success)throw{status:r.status,message:j.message||HINT[r.status]||'Terjadi kesalahan.',errors:j.errors||{}};
+  return j}
+function toast(m,t){const e=$('#toast');e.textContent=m;e.className=t||'';e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display='none',3800)}
+const fail=x=>toast(x.message,'err');
+const bd=s=>s?`<span class="bd ${E(s.kode)}">${E(s.label)}</span>`:'';
+function vis(c,a){if(!c)return true;if(c.any)return c.any.some(x=>vis(x,a));if(c.all)return c.all.every(x=>vis(x,a));
+  const v=a[c.question],f=!empty(v);
+  if('equals'in c)return v===c.equals;if('in'in c)return c.in.includes(v);
+  if('includes'in c)return Array.isArray(v)&&v.includes(c.includes);if('filled'in c)return f===c.filled;return true}
+const R={};let S={},H={f:'all',list:[]};
+async function route(){
+  const[,p,a]=(location.hash||'#/home').split('/');
+  document.querySelectorAll('nav a').forEach(n=>n.classList.toggle('on',n.dataset.p===p));
+  if(!ready()&&p!=='settings')return location.hash='#/settings';
+  $('#app').innerHTML='<p class="mut">Memuat…</p>';
+  try{await(R[p]||R.home)(a)}catch(x){fail(x);$('#app').innerHTML=`<div class="card"><h2>Halaman tidak bisa dimuat</h2><p>${E(x.message)}</p><a class="btn" href="#/home">Ke beranda</a> <a class="btn ghost" href="#/settings">Pengaturan</a></div>`}
+  scrollTo(0,0)}
+addEventListener('hashchange',route);
+
+/* ---------- Pengaturan ---------- */
+R.settings=()=>{$('#app').innerHTML=`<h1>Pengaturan</h1><div class="card"><h2>Identitas mahasiswa</h2><p class="mut">Dikirim bersama setiap pengisian agar dosen dapat memeriksa pekerjaan Anda.</p>
+<label class="f" for="nim">NIM</label><input type="text" id="nim" value="${E(cfg.nim)}">
+<label class="f" for="nama">Nama lengkap</label><input type="text" id="nama" value="${E(cfg.nama)}">
+<label class="f" for="kelas">Kelas</label><input type="text" id="kelas" value="${E(cfg.kelas)}"></div>
+<div class="card"><h2>Koneksi API</h2><label class="f" for="token">Token pasien (dari dosen)</label><input type="password" id="token" value="${E(cfg.token)}" placeholder="tlh_pasien_…">
+<label class="f" for="api">Alamat API</label><input type="text" id="api" value="${E(cfg.api)}"></div>
+<button class="btn" onclick="saveCfg()">Simpan dan uji koneksi</button>`};
+async function saveCfg(){
+  cfg={nim:$('#nim').value.trim().toUpperCase(),nama:$('#nama').value.trim(),kelas:$('#kelas').value.trim(),token:$('#token').value.trim(),api:$('#api').value.trim().replace(/\/$/,'')};
+  if(!/^[A-Z0-9]{5,20}$/.test(cfg.nim))return toast('NIM harus 5–20 huruf/angka.','err');
+  if(cfg.nama.length<3)return toast('Nama minimal 3 karakter.','err');
+  if(!cfg.kelas)return toast('Kelas wajib diisi.','err');
+  if(!cfg.token)return toast('Token wajib diisi.','err');
+  localStorage.setItem('cfg',JSON.stringify(cfg));
+  try{const r=await api('/me?nim='+cfg.nim);toast('Terhubung sebagai '+r.data.nama+'.');location.hash='#/home'}catch(x){fail(x)}}
+
+/* ---------- Beranda ---------- */
+R.home=async()=>{
+  const[me,fm,ut]=await Promise.all([api('/me?nim='+cfg.nim),api('/forms'),api('/uts/'+cfg.nim).catch(()=>null)]);
+  const d=me.data,s=d.statistik||{},bf=ut&&ut.data.bukti_fitur;
+  $('#app').innerHTML=`<h1>Halo, ${E(cfg.nama)}</h1><p class="mut">Pasien ${E(d.nama)} (${E(d.no_rm)}) · NIM ${E(cfg.nim)} · ${E(cfg.kelas)}</p>
+${s.perlu_klarifikasi?`<div class="note">Ada ${s.perlu_klarifikasi} laporan yang memerlukan klarifikasi. <a href="#/history">Jawab sekarang</a></div>`:''}
+<div class="card stats"><div><b>${s.total||0}</b>laporan</div><div><b>${s.draf||0}</b>draf</div><div><b>${s.menunggu||0}</b>menunggu</div><div><b>${s.perlu_klarifikasi||0}</b>perlu klarifikasi</div><div><b>${s.sudah_ditinjau||0}</b>sudah ditinjau</div></div>
+${fm.data.map(f=>`<div class="card"><h2>${E(g(f,'judul','title'))}</h2><p class="mut">${E(g(f,'deskripsi'))} Sekitar ${E(g(f,'estimasi_menit'))} menit.</p><a class="btn" href="#/intro/${E(f.id)}">Mulai self-assessment</a></div>`).join('')}
+${bf?`<div class="card"><h2>Kemajuan tugas UTS</h2><p>Bukti fitur terdeteksi: <b>${bf.tercapai}/${bf.total}</b>${ut.data.penilaian?' · Penilaian: '+E(ut.data.penilaian.status.label):''}</p><div class="bar"><i style="width:${bf.tercapai/bf.total*100}%"></i></div><details><summary>Lihat rincian</summary>${bf.daftar.map(x=>`<p>${x.tercapai?'✔':'○'} ${E(x.label)}</p>`).join('')}</details></div>`:''}`};
+
+/* ---------- Petunjuk & persetujuan ---------- */
+R.intro=async id=>{
+  const f=(await api('/forms/'+id)).data,p=f.persetujuan,pt=typeof p==='string'?p:g(p,'teks','text','pernyataan');
+  $('#app').innerHTML=`<h1>${E(g(f,'judul','title'))}</h1><p class="mut">${E(g(f,'deskripsi'))}</p>
+<div class="card"><h2>Petunjuk pengisian</h2><ul>${L(f.petunjuk).map(i=>`<li>${E(typeof i==='string'?i:g(i,'teks','text','judul'))}</li>`).join('')}</ul></div>
+<div class="card"><h2>Persetujuan penggunaan data</h2><label><input type="checkbox" id="cb" onchange="$('#go').disabled=!this.checked"> ${E(pt)}</label></div>
+<button class="btn" id="go" disabled onclick="start('${E(id)}')">Mulai mengisi</button>`};
+async function start(id){try{const r=await api('/assessments','POST',{form_id:id,persetujuan:true,mahasiswa:MHS()});location.hash='#/fill/'+r.data.id}catch(x){fail(x)}}
+
+/* ---------- Pengisian bertahap ---------- */
+R.fill=async id=>{
+  const a=(await api('/assessments/'+id)).data;
+  if(a.status_pengiriman.kode!=='draft')return location.hash='#/status/'+id;
+  const f=(await api('/forms/'+(g(a.form,'id')||a.form_id))).data;
+  S={id,f,ans:{...(a.answers||{})},i:0,err:{},q:{}};draw()};
+const secs=()=>S.f.sections.filter(s=>vis(s.show_if,S.ans)),
+vq=s=>s.questions.filter(q=>vis(q.show_if,S.ans)),
+sig=()=>secs().map(s=>vq(s).map(q=>q.id).join()).join('|');
+function opts(q){let o=L(g(q,'options','opsi')).map(x=>({v:g(x,'value','nilai'),l:g(x,'label'),ex:!!x.exclusive}));
+  if(!o.length&&q.type==='scale'){const a=q.min??1,b=q.max??5;for(let i=a;i<=b;i++)o.push({v:i,l:String(i)})}return S.q[q.id]=o}
+function qh(q){
+  const id=q.id,v=S.ans[id],t=q.type,o=opts(q),e=S.err[id],sat=g(q,'satuan','unit');let h='';
+  if(t==='single_choice'||t==='scale')h=o.map((x,k)=>`<button type="button" class="ch ${v===x.v?'on':''}" onclick="pick('${id}',${k})">${E(x.l)}</button>`).join('');
+  else if(t==='multi_choice')h=o.map((x,k)=>`<button type="button" class="ch ${L(v).includes(x.v)?'on':''}" aria-pressed="${L(v).includes(x.v)}" onclick="tog('${id}',${k})">${E(x.l)}</button>`).join('');
+  else if(t==='textarea')h=`<textarea rows="3" maxlength="${E(g(q,'max_length')||500)}" onchange="setv('${id}',this.value)">${E(v)}</textarea>`;
+  else if(t==='number')h=`<input type="number" step="any" min="${E(g(q,'min'))}" max="${E(g(q,'max'))}" value="${E(v)}" onchange="setv('${id}',this.value,1)"> ${E(sat)}`;
+  else if(t==='date')h=`<input type="date" max="${new Date().toISOString().slice(0,10)}" value="${E(v)}" onchange="setv('${id}',this.value)">`;
+  else h=`<input type="text" maxlength="${E(g(q,'max_length')||200)}" value="${E(v)}" onchange="setv('${id}',this.value)">`;
+  return `<div class="q ${e?'bad':''}"><div class="t">${E(g(q,'pertanyaan','label','text','question'))}${g(q,'required','wajib')?' <span class="req" aria-label="wajib">*</span>':''}</div>${g(q,'bantuan','help')?`<div class="mut">${E(g(q,'bantuan','help'))}</div>`:''}<div style="margin-top:.4rem">${h}</div>${e?`<div class="er">${E(e)}</div>`:''}</div>`}
+function draw(){
+  const ss=secs();S.i=Math.min(S.i,ss.length-1);const s=ss[S.i];
+  $('#app').innerHTML=`<p class="mut">Bagian ${S.i+1} dari ${ss.length}</p><div class="bar"><i style="width:${(S.i+1)/ss.length*100}%"></i></div>
+<div class="card"><h2>${E(g(s,'judul','title','nama'))}</h2><p class="mut">${E(g(s,'deskripsi','description'))}</p>${vq(s).map(qh).join('')}</div>
+<div class="row">${S.i?'<button class="btn ghost" onclick="S.i--;draw()">Kembali</button>':''}<button class="btn ghost" onclick="save(0)">Simpan draf</button><button class="btn" onclick="save(1)">${S.i===ss.length-1?'Periksa jawaban':'Lanjut'}</button></div>`}
+function setv(id,v,num){const b=sig();if(empty(v))delete S.ans[id];else S.ans[id]=num?Number(v):v;delete S.err[id];if(sig()!==b)draw()}
+function pick(id,k){const b=sig();S.ans[id]=S.q[id][k].v;delete S.err[id];sig()!==b?draw():draw()}
+function tog(id,k){const o=S.q[id][k];let v=L(S.ans[id]).slice();
+  if(v.includes(o.v))v=v.filter(x=>x!==o.v);else if(o.ex)v=[o.v];else v=v.filter(x=>!S.q[id].find(y=>y.v===x&&y.ex)).concat(o.v);
+  empty(v)?delete S.ans[id]:S.ans[id]=v;delete S.err[id];draw()}
+function clean(){const r={};secs().forEach(s=>vq(s).forEach(q=>r[q.id]=empty(S.ans[q.id])?null:S.ans[q.id]));return r}
+async function save(n){
+  const ss=secs();S.err={};
+  if(n){vq(ss[S.i]).forEach(q=>{if(g(q,'required','wajib')&&empty(S.ans[q.id]))S.err[q.id]=g(q,'pesan_wajib')||'Pertanyaan ini wajib diisi.'});
+    if(Object.keys(S.err).length){draw();return toast('Ada kolom wajib yang belum diisi.','err')}}
+  try{await api('/assessments/'+S.id,'PATCH',{answers:clean()})}catch(x){if(Object.keys(x.errors).length){S.err=x.errors;draw()}return fail(x)}
+  if(!n)return toast('Draf tersimpan.');
+  if(S.i<ss.length-1){S.i++;draw();scrollTo(0,0)}else location.hash='#/review/'+S.id}
+
+/* ---------- Periksa sebelum kirim ---------- */
+R.review=async id=>{
+  const a=(await api('/assessments/'+id)).data,fid=g(a.form,'id')||a.form_id;
+  const r=(await api('/forms/'+fid+'/validate','POST',{nim:cfg.nim,answers:a.answers||{}})).data,k=r.kelengkapan||{},er=Object.entries(r.errors||{}),rs=g(r.hasil_pratinjau,'ringkasan')||[];
+  $('#app').innerHTML=`<h1>Periksa jawaban</h1><div class="card"><p>Kelengkapan: <b>${E(k.persen)}%</b></p><div class="bar"><i style="width:${k.persen||0}%"></i></div>
+${er.length?`<div class="note"><b>Masih perlu dilengkapi:</b><ul>${er.map(([q,m])=>`<li>${E(m)}</li>`).join('')}</ul></div>`:'<div class="info">Semua jawaban wajib sudah terisi.</div>'}</div>
+<div class="card"><h2>Ringkasan jawaban</h2><table>${rs.map(x=>`<tr><td>${E(x.label)}</td><td>${x.terisi?E(x.jawaban_teks):'<i class="mut">Belum diisi</i>'}</td></tr>`).join('')}</table></div>
+<div class="row"><a class="btn ghost" href="#/fill/${E(id)}">Ubah jawaban</a><button class="btn" ${r.valid?'':'disabled'} onclick="submitF('${E(id)}')">Kirim jawaban</button></div><p class="mut">Setelah dikirim, jawaban tidak dapat diubah.</p>`};
+async function submitF(id){if(!confirm('Kirim jawaban sekarang? Setelah dikirim tidak dapat diubah.'))return;
+  try{await api('/assessments/'+id+'/submit','POST');location.hash='#/done/'+id}catch(x){fail(x);if(x.status===422)location.hash='#/fill/'+id}}
+R.done=async id=>{
+  const d=(await api('/assessments/'+id+'/status')).data;
+  $('#app').innerHTML=`<div class="card"><div class="big" style="color:var(--ok)">✓</div><h1>Formulir Anda telah diterima</h1><p>Nomor laporan <b>${E(id)}</b></p><p>${bd(d.status_pengiriman)}${bd(d.status_peninjauan)}</p><p>${E(d.pesan)}</p>
+<div class="row"><a class="btn" href="#/status/${E(id)}">Pantau status</a><a class="btn ghost" href="#/result/${E(id)}">Lihat ringkasan</a><a class="btn ghost" href="#/home">Selesai</a></div></div>`};
+
+/* ---------- Riwayat ---------- */
+const FL={all:'Semua',draf:'Draf',proses:'Diproses',klar:'Perlu klarifikasi',done:'Sudah ditinjau'};
+const fm={all:()=>1,draf:a=>a.status_pengiriman.kode==='draft',proses:a=>['menunggu_peninjauan','sedang_ditinjau','klarifikasi_dijawab'].includes(a.status_peninjauan.kode),klar:a=>a.status_peninjauan.kode==='perlu_klarifikasi',done:a=>a.status_peninjauan.kode==='sudah_ditinjau'};
+R.history=async()=>{H.list=(await api('/assessments?nim='+cfg.nim)).data;hist()};
+function hist(){
+  const l=H.list.filter(fm[H.f]);
+  $('#app').innerHTML=`<h1>Riwayat</h1><div>${Object.entries(FL).map(([k,v])=>`<button class="ch ${H.f===k?'on':''}" onclick="H.f='${k}';hist()">${v}</button>`).join('')}</div>
+${l.length?l.map(a=>{const d=a.status_pengiriman.kode==='draft';return `<div class="card"><h2>${E(a.judul)}</h2><p class="mut">${E(g(a.form,'judul'))} · ${E(a.id)}<br>${d?'Dibuat '+F(a.dibuat_pada):'Dikirim '+F(a.dikirim_pada)}</p><p>${bd(a.status_pengiriman)}${d?'':bd(a.status_peninjauan)}</p>
+${a.klarifikasi_menunggu?'<div class="note">Petugas meminta klarifikasi.</div>':''}
+<div class="row">${d?`<a class="btn sm" href="#/fill/${a.id}">Lanjutkan pengisian</a><button class="btn red sm" onclick="del('${a.id}')">Hapus draf</button>`:`<a class="btn ghost sm" href="#/result/${a.id}">Lihat ringkasan</a><a class="btn sm" href="#/status/${a.id}">${a.klarifikasi_menunggu?'Jawab klarifikasi':a.ada_tindak_lanjut?'Lihat tindak lanjut':'Pantau status'}</a>`}</div></div>`}).join(''):'<div class="card"><p>Belum ada laporan di kategori ini.</p><a class="btn" href="#/home">Mulai self-assessment</a></div>'}`}
+async function del(id){if(!confirm('Hapus draf ini?'))return;try{await api('/assessments/'+id,'DELETE');H.list=H.list.filter(a=>a.id!==id);hist();toast('Draf dihapus.')}catch(x){fail(x)}}
+
+/* ---------- Hasil ---------- */
+R.result=async id=>{
+  const d=(await api('/assessments/'+id+'/hasil')).data,h=d.hasil||d,p=d.perubahan||h.perubahan,sk=h.skor,k=h.kelengkapan||{};
+  $('#app').innerHTML=`<h1>${E(h.judul)}</h1><p class="mut">Laporan ${E(id)} · Kelengkapan ${E(k.label)} (${E(k.persen)}%)</p>
+${sk?`<div class="card"><div class="big">${E(sk.total)}<span class="mut" style="font-size:1.2rem"> / ${E(sk.maks)}</span></div><p><b>Kategori ${E(sk.kategori.label)}</b> (rentang ${E(sk.kategori.rentang)})</p><p>${E(sk.keterangan)}</p></div>`:''}
+${p&&p.jumlah_perubahan?`<div class="card"><h2>Perubahan dari laporan sebelumnya</h2>${p.skor?`<p>Skor ${E(p.skor.sebelumnya)} → <b>${E(p.skor.sekarang)}</b> (${p.skor.selisih>0?'+':''}${E(p.skor.selisih)})</p>`:''}<table>${p.perubahan.map(x=>`<tr><td>${E(x.label)}</td><td>${E(x.sebelumnya)} → <b>${E(x.sekarang)}</b></td></tr>`).join('')}</table></div>`:''}
+<div class="card"><h2>Jawaban Anda</h2><table>${(h.ringkasan||[]).map(x=>`<tr><td>${E(x.label)}</td><td>${x.terisi?E(x.jawaban_teks)+(x.satuan?' '+E(x.satuan):''):'<i class="mut">Belum diisi</i>'}</td></tr>`).join('')}</table></div>
+<div class="note"><b>Keterbatasan hasil.</b> ${E(h.keterbatasan)}</div><div class="info"><b>Langkah berikutnya.</b> ${E(h.langkah_berikutnya)}</div>
+<a class="btn" href="#/status/${E(id)}">Pantau status laporan</a>`};
+
+/* ---------- Status, klarifikasi, tindak lanjut ---------- */
+R.status=async id=>{
+  const d=(await api('/assessments/'+id+'/status')).data,t=d.tindak_lanjut;
+  $('#app').innerHTML=`<h1>Status laporan ${E(id)}</h1>
+<div class="card"><table><tr><td>Pengiriman</td><td>${bd(d.status_pengiriman)}</td></tr><tr><td>Peninjauan</td><td>${bd(d.status_peninjauan)}</td></tr></table><div class="info" style="margin:.8rem 0 0">${E(d.pesan)}</div></div>
+${L(d.klarifikasi_menunggu).map(k=>`<div class="card"><h2>Klarifikasi dari petugas</h2><div class="info">${E(k.pertanyaan)}</div><label class="f" for="r${E(k.id)}">Jawaban Anda</label><textarea id="r${E(k.id)}" rows="3"></textarea><div class="er" id="e${E(k.id)}"></div><div class="row"><button class="btn" onclick="reply('${E(id)}','${E(k.id)}')">Kirim jawaban</button></div></div>`).join('')}
+${t?`<div class="card"><h2>Tindak lanjut</h2><p>${bd({kode:'sudah_ditinjau',label:t.jenis.label})}</p><p>${E(t.arahan)}</p>${t.jadwal_konsultasi?`<div class="info"><b>Jadwal konsultasi:</b> ${E(F(t.jadwal_konsultasi))}</div>`:''}<p class="mut">Dicatat oleh ${E(g(t.dicatat_oleh,'nama'))} · ${E(F(t.dicatat_pada))}</p></div>`:''}
+<div class="card"><h2>Riwayat status</h2><div class="tl">${L(d.timeline).slice().reverse().map(x=>`<p><b>${E(x.keterangan)}</b><br><span class="mut">${E(F(x.waktu))}</span></p>`).join('')}</div></div>
+<div class="row"><a class="btn ghost" href="#/result/${E(id)}">Lihat ringkasan</a><button class="btn" onclick="route()">Muat ulang status</button></div>`};
+async function reply(id,cid){
+  const v=$('#r'+cid).value.trim();if(!v){$('#e'+cid).textContent='Jawaban tidak boleh kosong.';return}
+  try{await api(`/assessments/${id}/clarifications/${cid}/reply`,'POST',{jawaban:v});toast('Jawaban terkirim.');route()}catch(x){$('#e'+cid).textContent=x.errors.jawaban||x.message;fail(x)}}
+route();
+</script>
+</body>
+</html>
